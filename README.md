@@ -19,6 +19,7 @@ Nakon vaše prijave bit će vam dodijeljen mentor s kojim ćete tijekom semestra
 Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa
 ------------  | ------------------- | ----- | --------------------- | ----------------
 Dominik Josipović | djosipovi21@foi.hr | 0016152387 | djosipovi21 | G02
+Karlo Mikec | kmikec20@foi.hr | 0016151582 | kmikec20 | G02
 Ime i prezime | ... | ... | ... | ...
 
 ## Opis domene
