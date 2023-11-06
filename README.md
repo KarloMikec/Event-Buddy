@@ -28,6 +28,18 @@ F09 | Slanje notifikacija | Aplikacija će na mobilni uređaj slati notifikacije
 F10 | Upravljanje zahtjevima za organizatora | Moderator i administrator će moći vidjeti zahtjeve korisnika da postanu organizatori. Za svakog korisnika vidjeti će jedan zahtjev na kojeg mogu kliknuti te vidjeti detalje upita korisnika. Moguće je odobriti zahtjev klikom na gumb "Odobri" ili "Odbij". Odobrenjem zahtjeva korisniku se dodjeljuje uloga organizatora te može kreirati svoje događaje i šalje mu se notifikacija potvrde. U suprotnom slučaju korisnik ne dobiva ulogu organizatora i šalje mu se notifikacija da mu je zahtjev odbijen. | Dominik Josipović
 F11 | Davanje recenzija događajima | Svi korisnici koji su sudjelovali na događaju mogu dati recenziju događaju kada on završi. Korisnik pregledava događaje koji su završili, može kliknuti na događaj te daje ocjenu zahtjevu. Na taj način omogućeno je ostalim korisnicima da mogu vidjeti koliko dobre događaje radi pojedini organizator. Prilikom gledanja detalja događaja koji nije započeo moguće je pregledati profil organizatora na kojem će biti prikazani njegovi prethodni događaji te će se tada na pojedinom događaju moći vidjeti ocjena koju su mu sudionici dodijelili. | Karlo Mikec
 
+Oznaka | Naziv | Kratki opis | Odgovorni član tima
+------ | ----- | ----------- | -------------------
+F01 | Upravljanje računom | prijava, registracija, uređivanje
+F02 | Pregledavanje događaja | prikaz, pregled odabranog, filtriranje, pretraživanje
+F03 | Pretplata na događaj |
+F04 | Pregledavanje objava te komentiranje |
+F05 | Pregledavanje sudionika |
+F06 | Upravljanje obavijestima  |
+F07 | Kreiranje događaja | [organizator] kreiranje i uređivanje
+F08 | Kreiranje objave | [organizator]
+F09 | Upravljanje sudionicima | [organizator] kick/ban
+
 ## Tehnologije i oprema
 Projekt se fokusira na razvoj mobilne aplikacije za informiranje o budućim događajima, koja će omogućiti korisnicima pravovremene informacije o nadolazećim događajima. Aplikacija će biti razvijena koristeći najnovije tehnologije i alate kako bi se osigurala izvrsna korisnička iskustva.
 
