@@ -25,9 +25,8 @@ F06 | Nadziranje zajednice | Moderator će moći prilikom pregledavanja događaj
 F07 | Pregledavanje svojih događaja | Korisnici će moći vidjeti svoje događaje na koje su se pretplatili. Organizatori će moći vidjeti vlastite kreirane događaje kao i one na koje su se pretplatili, moći će vidjeti i prošle događaje, ali ih neće moći uređivati ili postavljati objave na njih. Administrator može vidjeti sve događaje u sustavu, skrivene, istekle te će moći skrivene događaje ponovno prikazati ukoliko događaj nije "započeo", također može kreirati vlastiti događaj. Moderatori u ovom slučaju imaju iste privilegije kao i obični korisnici osim ako im nije dodijeljena uloga organizatora te u tom slučaju mogu i oni kreirati svoje događaje te vidjeti pod vlastitim događajima. | Sebastijan Vinko
 F08 | Upravljanje korisničkim računima i ulogama | Administrator može bilo kojem korisniku dodijeliti ulogu organizatora i moderatora te iste oduzeti. Korisnik postaje organizatorom ukoliko pošalje zahtjev da želi postati organizator te mu tada administrator ili moderator mora odobriti zahtjev nakon čega se korisniku dodjeljuje uloga organizatora. Ulogu moderatora korisnik dobije na način da mu je dodijeli administrator. Moderator može organizatoru oduzeti ulogu. Korisnički račun može u isto vrijeme biti i moderator i organizator, razlika je u tome što korisnički račun koji ima samo ulogu moderatora neće moći kreirati događaje. | Dominik Josipović
 F09 | Slanje notifikacija | Aplikacija će na mobilni uređaj slati notifikacije o početku događaja, kreiranoj objavi na događaju od strane organizatora, poslati će biti obavijest organizatoru ukoliko netko odgovori na njegovu objavu te će upozoriti sve sudionike koje su pretplaćene na događaj o početku događaja. Korisnici kojima je odobren zahtjev za organizatora također će dobiti obavijest o tome. | Sebastijan Vinko
-F10 | Upravljanje zahtjevima za organizatora | Moderator i administrator će moći vidjeti zahtjeve korisnika da postanu organizatori. Za svakog korisnika vidjeti će jedan zahtjev na kojeg mogu kliknuti te vidjeti detalje upita korisnika. Moguće je odobriti zahtjev klikom na gumb "Odobri" ili "Odbij". Odobrenjem zahtjeva korisniku se dodjeljuje uloga organizatora te može kreirati svoje događaje i šalje mu se notifikacija potvrde. U suprotnom slučaju korisnik ne dobiva ulogu organizatora i šalje mu se notifikacija da mu je zahtjev odbijen. | Dominik Josipović
-F11 | Davanje recenzija događajima | Svi korisnici koji su sudjelovali na događaju mogu dati recenziju događaju kada on završi. Korisnik pregledava događaje koji su završili, može kliknuti na događaj te daje ocjenu zahtjevu. Na taj način omogućeno je ostalim korisnicima da mogu vidjeti koliko dobre događaje radi pojedini organizator. Prilikom gledanja detalja događaja koji nije započeo moguće je pregledati profil organizatora na kojem će biti prikazani njegovi prethodni događaji te će se tada na pojedinom događaju moći vidjeti ocjena koju su mu sudionici dodijelili. | Karlo Mikec
-
+F10 | 
+F11 |
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
 F01 | Upravljanje računom | prijava, registracija, uređivanje
@@ -50,9 +49,6 @@ Android Studio: Android Studio će biti glavno razvojno okruženje koje će se k
 Baza podataka: Aplikacija će koristiti MySQL Workbench za modeliranje baze podataka i pohranu korisničkih podataka.
  
 Git i GitHub: Za verzioniranje programskog koda koristit ćemo Git kao sustav za kontrolu verzija, a GitHub će nam biti platforma za rad na programskom rješenju i projektu u cjelini. Ovo će omogućiti timu da učinkovito surađuje na razvoju aplikacije, prati promjene i održava povijest razvoja.
-
-## Baza podataka i web server
-***"Trebamo bazu podataka i pristup serveru za PHP skripte"***
 
 ## .gitignore
 Uzmite u obzir da je u mapi Software .gitignore konfiguriran za nekoliko tehnologija, ali samo ako će projekti biti smješteni direktno u mapu Software ali ne i u neku pod mapu. Nakon odabira konačne tehnologije i projekta obavezno dopunite/premjestite gitignore kako bi vaš projekt zadovoljavao kriterije koji su opisani u ReadMe.md dokumentu dostupnom u mapi Software.
