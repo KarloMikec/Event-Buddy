@@ -49,7 +49,7 @@ Programski jezik Kotlin: Kotlin će biti glavni programski jezik korišten za ra
 
 Android Studio: Android Studio će biti glavno razvojno okruženje koje će se koristiti za izradu aplikacije. Android Studio pruža bogat skup alata i resursa za razvoj Android aplikacija, uključujući emulator za testiranje i optimizaciju performansi aplikacije.
 
-Baza podataka: Aplikacija će koristiti MySQL Workbench za modeliranje baze podataka i pohranu korisničkih podataka.
+Baza podataka: Aplikacija će koristiti Firebase za modeliranje baze podataka i pohranu korisničkih podataka. Firebase je platforma za razvoj mobilnih i web aplikacija koja je razvijena od strane Goodle-a. Nudi širok spektar alata i usluga koji olakšavaju razvoj, testiranje i optimizaciju aplikacije. Pruža real-time bazu podataka koja omogućuje trenutno sinkroniziranje podataka između korisnika aplikacije.
  
 Git i GitHub: Za verzioniranje programskog koda koristit ćemo Git kao sustav za kontrolu verzija, a GitHub će nam biti platforma za rad na programskom rješenju i projektu u cjelini. Ovo će omogućiti timu da učinkovito surađuje na razvoju aplikacije, prati promjene i održava povijest razvoja.
 
