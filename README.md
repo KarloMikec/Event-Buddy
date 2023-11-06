@@ -29,15 +29,18 @@ F10 |
 F11 |
 Oznaka | Naziv | Kratki opis | Odgovorni član tima
 ------ | ----- | ----------- | -------------------
-F01 | Upravljanje računom | prijava, registracija, uređivanje
-F02 | Pregledavanje događaja | prikaz, pregled odabranog, filtriranje, pretraživanje
-F03 | Pretplata na događaj |
-F04 | Pregledavanje objava te komentiranje |
-F05 | Pregledavanje sudionika |
-F06 | Upravljanje obavijestima  |
-F07 | Kreiranje događaja | [organizator] kreiranje i uređivanje
-F08 | Kreiranje objave | [organizator]
-F09 | Upravljanje sudionicima | [organizator] kick/ban
+F01 | Upravljanje računom | prijava, registracija
+F02 | Uređivanje računa | uređivanje raćuna
+F03 | Slanje zahtjeva | slanje zahtjeva za organizatora
+F04 | Pregledavanje događaja | prikaz, pregled odabranog, filtriranje, pretraživanje
+F05 | Pretplata na događaj |
+F06 | Pregledavanje objava te komentiranje |
+F07 | Pregledavanje sudionika |
+F08 | Upravljanje obavijestima  |
+F09 | Kreiranje događaja | [organizator] kreiranje i uređivanje
+F10 | Kreiranje objave | [organizator]
+F11 | Upravljanje sudionicima | [organizator] kick/ban
+F12 | Upravljanje sudionicima | [organizator] kick/ban
 
 ## Tehnologije i oprema
 Projekt se fokusira na razvoj mobilne aplikacije za informiranje o budućim događajima, koja će omogućiti korisnicima pravovremene informacije o nadolazećim događajima. Aplikacija će biti razvijena koristeći najnovije tehnologije i alate kako bi se osigurala izvrsna korisnička iskustva.
