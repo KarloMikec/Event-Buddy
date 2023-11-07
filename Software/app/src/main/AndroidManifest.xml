@@ -23,4 +23,5 @@
         </activity>
         <activity android:name=".activities.StartScreen"/>
     </application>
+
 </manifest>
