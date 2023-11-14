@@ -3,4 +3,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="Confirm_password">Confirm password</string>
+    <string name="ime">Ime</string>
+    <string name="Prezime">Prezime</string>
+    <string name="Email">Email</string>
+    <string name="Korisničko_ime">korisničko ime</string>
+    <string name="Lozinka">Lozinka</string>
+    <string name="Potvrdi_lozinku">Potvrdi lozinku</string>
+    <string name="registracija">Registracija</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="event_buddy">Event Buddy</string>
 </resources>
