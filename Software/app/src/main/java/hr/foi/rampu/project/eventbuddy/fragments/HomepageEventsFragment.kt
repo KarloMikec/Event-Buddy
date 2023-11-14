@@ -27,4 +27,11 @@ class HomepageEventsFragment : Fragment() {
         recyclerView.adapter = EventsAdapter(MockDataLoader.getDemoData())
         recyclerView.layoutManager = LinearLayoutManager(view.context)
     }
+
+    override fun onResume() {
+        super.onResume()
+        recyclerView = requireView().findViewById(R.id.rv_homepage_events)
+        recyclerView.adapter = EventsAdapter(MockDataLoader.getDemoData())
+        recyclerView.layoutManager = LinearLayoutManager(requireView().context)
+    }
 }
