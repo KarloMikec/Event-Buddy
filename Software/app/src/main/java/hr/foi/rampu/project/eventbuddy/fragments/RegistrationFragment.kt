@@ -1,6 +1,7 @@
 package hr.foi.rampu.project.eventbuddy.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -10,7 +11,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import hr.foi.rampu.project.eventbuddy.MainActivity
 import hr.foi.rampu.project.eventbuddy.R
+
+
 class RegistrationFragment : Fragment() {
     private lateinit var ime: EditText
     private lateinit var prezime: EditText
@@ -71,6 +75,9 @@ class RegistrationFragment : Fragment() {
                 if(lozinka.text.toString().length >= 8){
                     if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
                         Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(context, MainActivity::class.java)
+                        startActivity(intent)
                     }
                     else {
                         potvrdiLozinku.setError("Lozinke se ne podudaraju!")
@@ -81,4 +88,5 @@ class RegistrationFragment : Fragment() {
             }
         }
     }
+
 }

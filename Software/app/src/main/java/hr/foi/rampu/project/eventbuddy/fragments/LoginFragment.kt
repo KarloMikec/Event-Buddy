@@ -1,6 +1,7 @@
 package hr.foi.rampu.project.eventbuddy.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.activities.StartScreen
 
 
 class LoginFragment : Fragment() {
@@ -53,6 +55,9 @@ class LoginFragment : Fragment() {
             korisnik_prijava.text.toString().trim() == testKorime &&
                     korisnik_lozinka.text.toString().trim() == testLozinka -> {
                 Toast.makeText(context, "Uspješna prijava", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent(context, StartScreen::class.java)
+                startActivity(intent)
             }
             else -> {
 
