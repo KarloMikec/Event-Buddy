@@ -2,12 +2,14 @@ package hr.foi.rampu.project.eventbuddy.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 import hr.foi.rampu.project.eventbuddy.helpers.NewEventDialogHelper
 
 class MyEventsCreateEventFragment : Fragment() {
@@ -34,11 +36,15 @@ class MyEventsCreateEventFragment : Fragment() {
             .inflate(R.layout.new_event_dialog, null)
 
         val dialogHelper = NewEventDialogHelper(newTaskDialogView)
-
         AlertDialog.Builder(context)
             .setView(newTaskDialogView)
             .setTitle("Kreiraj novi događaj")
             .setPositiveButton("Kreiraj") { _, _ ->
+                val newEvent = dialogHelper.buildEvent()
+
+                Log.d("TAG", newEvent.name + " " + newEvent.location + " " + newEvent.date + " " + newEvent.time + " " + newEvent.places   )
+
+                MockDataLoader.addEvent(newEvent)
             }
             .setNegativeButton("Odustani"){ _, _ ->}
             .show()

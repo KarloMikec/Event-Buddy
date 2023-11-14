@@ -5,11 +5,12 @@ import android.app.TimePickerDialog
 import android.view.View
 import android.widget.EditText
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.entities.Event
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class NewEventDialogHelper(view: View) {
+class NewEventDialogHelper(private val view: View) {
 
     private val selectedDateTime: Calendar = Calendar.getInstance()
 
@@ -52,5 +53,17 @@ class NewEventDialogHelper(view: View) {
                 view.clearFocus()
             }
         }
+    }
+
+    fun buildEvent(): Event {
+        val eventName = view.findViewById<EditText>(R.id.et_new_event_dialog_eventName)
+        val location = view.findViewById<EditText>(R.id.et_new_event_dialog_location)
+        val participants = 0
+        val places = view.findViewById<EditText>(R.id.et_new_event_dialog_places)
+
+        val eventNameText = eventName.text.toString()
+        val locationText = location.text.toString()
+        val placesInt = Integer.parseInt(places.text.toString())
+        return Event(eventNameText, selectedDateTime.time, selectedDateTime.time, locationText, participants, placesInt)
     }
 }
