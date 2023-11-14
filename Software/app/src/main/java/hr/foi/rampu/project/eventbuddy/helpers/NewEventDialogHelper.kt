@@ -63,7 +63,10 @@ class NewEventDialogHelper(private val view: View) {
 
         val eventNameText = eventName.text.toString()
         val locationText = location.text.toString()
-        val placesInt = Integer.parseInt(places.text.toString())
+        var placesInt = 0
+        if(places.text.toString() != ""){
+            placesInt = Integer.parseInt(places.text.toString())
+        }
         return Event(eventNameText, selectedDateTime.time, selectedDateTime.time, locationText, participants, placesInt)
     }
 }
