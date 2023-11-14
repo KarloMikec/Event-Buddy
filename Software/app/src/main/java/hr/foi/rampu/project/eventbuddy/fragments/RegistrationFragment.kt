@@ -68,19 +68,15 @@ class RegistrationFragment : Fragment() {
                      korisnickoIme.text.toString().isNotEmpty() && lozinka.text.toString().isNotEmpty() &&
                      potvrdiLozinku.text.toString().isNotEmpty() ->
             {
-                if (korisnickoIme.text.toString().matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))){
-                    if(lozinka.text.toString().length >= 8){
-                        if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
-                            Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
-                        }
-                        else {
-                            potvrdiLozinku.setError("Lozinke se ne podudaraju!")
-                        }
-                    } else{
-                        lozinka.setError("Lozinka ima manje od 8 znakova!")
+                if(lozinka.text.toString().length >= 8){
+                    if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
+                        Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
                     }
-                }else{
-                    korisnickoIme.setError("Unesite točno korisničko ime!")
+                    else {
+                        potvrdiLozinku.setError("Lozinke se ne podudaraju!")
+                    }
+                } else{
+                    lozinka.setError("Lozinka ima manje od 8 znakova!")
                 }
             }
         }

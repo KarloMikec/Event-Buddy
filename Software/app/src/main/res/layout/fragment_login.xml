@@ -27,6 +27,7 @@
         app:boxBackgroundColor="#D0D0D0">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/korisnik_prijava"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -42,6 +43,7 @@
         android:layout_marginEnd="40dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/korisnik_lozinka"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
