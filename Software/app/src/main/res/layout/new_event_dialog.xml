@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     >
 
     <EditText
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:hint="Naziv..."
         android:inputType="text"
+        android:layout_marginBottom="15dp"
         />
 
     <EditText
@@ -19,6 +21,7 @@
         android:layout_height="wrap_content"
         android:hint="Lokacija..."
         android:inputType="text"
+        android:layout_marginBottom="15dp"
         />
 
     <EditText
@@ -27,6 +30,7 @@
         android:layout_height="wrap_content"
         android:hint="Datum..."
         android:inputType="date"
+        android:layout_marginBottom="15dp"
         />
 
     <EditText
@@ -35,6 +39,7 @@
         android:layout_height="wrap_content"
         android:hint="Vrijeme..."
         android:inputType="time"
+        android:layout_marginBottom="15dp"
         />
 
     <EditText
@@ -43,6 +48,7 @@
         android:layout_height="wrap_content"
         android:hint="Broj sudionika..."
         android:inputType="number"
+        android:layout_marginBottom="15dp"
         />
 
 </LinearLayout>

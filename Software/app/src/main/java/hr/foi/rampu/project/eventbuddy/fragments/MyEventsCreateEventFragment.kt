@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.helpers.NewEventDialogHelper
+
 class MyEventsCreateEventFragment : Fragment() {
     private lateinit var btnCreateNewEvent: FloatingActionButton
     override fun onCreateView(
@@ -31,11 +33,16 @@ class MyEventsCreateEventFragment : Fragment() {
             .from(context)
             .inflate(R.layout.new_event_dialog, null)
 
+        val dialogHelper = NewEventDialogHelper(newTaskDialogView)
+
         AlertDialog.Builder(context)
             .setView(newTaskDialogView)
             .setTitle("Kreiraj novi događaj")
             .setPositiveButton("Kreiraj") { _, _ ->
             }
+            .setNegativeButton("Odustani"){ _, _ ->}
             .show()
+
+        dialogHelper.activateDateTimeListeners()
     }
 }
