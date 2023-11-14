@@ -61,7 +61,7 @@ class MyEventsFragment : Fragment() {
         )
         my_events_adapter.addFragment(
             HomepageEventsAdapter.FragmentItem(
-                "Vlasitti",
+                "Vlastiti",
                 MyEventsCreateEventFragment::class
             )
         )
