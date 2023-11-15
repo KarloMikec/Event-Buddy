@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.LoginFragment"
+    tools:context=".fragments.EditFragment"
     android:orientation="horizontal">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registracija"
+        android:text="@string/Uredi_profil"
         android:textSize="30sp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="110dp"
         android:layout_marginEnd="115dp"
         />
@@ -21,13 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:hint="@string/ime"
         app:boxBackgroundColor="#D0D0D0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ime"
+            android:id="@+id/ime_uredi_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -37,13 +37,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="40dp"
         android:hint="@string/Prezime"
         app:boxBackgroundColor="#D0D0D0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/prezime"
+            android:id="@+id/prezime_uredi_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -54,15 +54,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="40dp"
         android:hint="@string/Korisničko_ime"
-        app:boxBackgroundColor="#D0D0D0">
+        app:boxBackgroundColor="#D0D0D0"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/korime"
+            android:id="@+id/korime_uredi_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -71,13 +73,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="40dp"
-        android:hint="@string/Lozinka"
+        android:hint="@string/Unesi_staru_lozinku"
         app:boxBackgroundColor="#D0D0D0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_lozinka"
+            android:id="@+id/user_lozinka_uredi_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
@@ -88,41 +90,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="360dp"
         android:layout_marginEnd="40dp"
-        android:hint="@string/Potvrdi_lozinku"
+        android:hint="@string/Nova_lozinka"
         app:boxBackgroundColor="#D0D0D0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/user_lozinka_potvrdi"
+            android:id="@+id/user_lozinka_potvrdi_uredi_profil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp">
+        android:layout_marginTop="440dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Login_register"
+            android:id="@+id/btn_edit_spremi"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Odustani"
+            android:text="@string/Spremi"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="40dp"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_fragment_login_register"
+            android:id="@+id/btn_edit_odustani"
             android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:layout_toStartOf="@+id/btn_Login_register"
+            android:text="@string/Odustani"
+            android:layout_toStartOf="@+id/btn_edit_spremi"
             android:layout_marginEnd="40dp"/>
 
     </RelativeLayout>
+
 </FrameLayout>

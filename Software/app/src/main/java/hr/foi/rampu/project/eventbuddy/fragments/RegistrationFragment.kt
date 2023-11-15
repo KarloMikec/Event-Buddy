@@ -13,6 +13,8 @@ import android.widget.EditText
 import android.widget.Toast
 import hr.foi.rampu.project.eventbuddy.MainActivity
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.entities.User
+import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 
 class RegistrationFragment : Fragment() {
@@ -75,7 +77,8 @@ class RegistrationFragment : Fragment() {
                 if(lozinka.text.toString().length >= 8){
                     if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
                         Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
-
+                        val novi = User(ime.text.toString(), prezime.text.toString(), korisnickoIme.text.toString(), lozinka.text.toString(), false)
+                        MockDataLoader.registerUser(novi)
                         val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)
                     }

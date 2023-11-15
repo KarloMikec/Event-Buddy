@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.activities.StartScreen
+import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 
 class LoginFragment : Fragment() {
@@ -42,9 +43,6 @@ class LoginFragment : Fragment() {
     }
     private fun provjeraUnosaLogin(){
 
-        val testKorime = "admin"
-        val testLozinka = "admin"
-
         when {
             TextUtils.isEmpty(korisnik_prijava.text.toString().trim()) -> {
                 korisnik_prijava.setError("Unesite korisničko ime!")
@@ -52,24 +50,21 @@ class LoginFragment : Fragment() {
             TextUtils.isEmpty(korisnik_lozinka.text.toString().trim()) -> {
                 korisnik_lozinka.setError("Ponovno unesite lozinku!")
             }
-            korisnik_prijava.text.toString().trim() == testKorime &&
-                    korisnik_lozinka.text.toString().trim() == testLozinka -> {
+            MockDataLoader.provjeriLozinku(korisnik_prijava.text.toString().trim(), korisnik_lozinka.text.toString().trim()) -> {
                 Toast.makeText(context, "Uspješna prijava", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(context, StartScreen::class.java)
                 startActivity(intent)
             }
             else -> {
-
-                if (korisnik_prijava.text.toString().trim() != testKorime) {
+                if(!MockDataLoader.provjeriAkoPostoji(korisnik_prijava.text.toString().trim())) {
                     korisnik_prijava.setError("Unesite točno korisničko ime!")
-                } else if (korisnik_lozinka.text.toString().trim() != testLozinka) {
-                    korisnik_lozinka.setError("Unesite točnu lozinku!")
                 } else {
-                    Toast.makeText(context, "Neispravni podaci za prijavu", Toast.LENGTH_SHORT).show()
+                    korisnik_lozinka.setError("Unesite točnu lozinku!")
                 }
             }
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -17,4 +17,9 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="event_buddy">Event Buddy</string>
+    <string name="Uredi_profil">Uredi profil</string>
+    <string name="Spremi">Spremi</string>
+    <string name="Odustani">Odustani</string>
+    <string name="Unesi_staru_lozinku">Unesi staru lozinku</string>
+    <string name="Nova_lozinka">Nova lozinka</string>
 </resources>
