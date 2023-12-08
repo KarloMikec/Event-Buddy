@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.adapters.EventsAdapter
-import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
+import hr.foi.rampu.project.eventbuddy.database.EventsDao
 
 class HomepageEventsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var eventsDao: EventsDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,14 +25,16 @@ class HomepageEventsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = view.findViewById(R.id.rv_homepage_events)
-        recyclerView.adapter = EventsAdapter(MockDataLoader.getDemoData())
+        eventsDao = EventsDao()
+        recyclerView.adapter = EventsAdapter(eventsDao.getAllEvents().toMutableList())
         recyclerView.layoutManager = LinearLayoutManager(view.context)
     }
 
     override fun onResume() {
         super.onResume()
         recyclerView = requireView().findViewById(R.id.rv_homepage_events)
-        recyclerView.adapter = EventsAdapter(MockDataLoader.getDemoData())
+        eventsDao = EventsDao()
+        recyclerView.adapter = EventsAdapter(eventsDao.getAllEvents().toMutableList())
         recyclerView.layoutManager = LinearLayoutManager(requireView().context)
     }
 }
