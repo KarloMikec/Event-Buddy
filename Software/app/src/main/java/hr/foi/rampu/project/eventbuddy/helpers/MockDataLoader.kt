@@ -7,9 +7,7 @@ import java.util.Date
 object MockDataLoader {
 
 
-    val mutableList: MutableList<Event> = mutableListOf(Event("Sober", Date(), Date(), "Varaždin", 20, 70),
-        Event("Infogamer", Date(), Date(), "Zagreb", 12876, 20000),
-        Event("BruciFER", Date(), Date(), "Zagreb", 234, 500))
+    val mutableList: MutableList<Event> = mutableListOf()
 
     val registeredUsers: MutableList<User> = mutableListOf(User("Karlo", "Mikec", "admin", "admin", true ))
 
