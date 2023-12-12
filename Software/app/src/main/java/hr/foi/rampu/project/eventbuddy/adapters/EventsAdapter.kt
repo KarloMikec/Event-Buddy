@@ -38,7 +38,7 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
             eventTime.text = sdfTime.format(event.time)
             eventLocation.text = event.location
             eventParticipants.text = event.participants.toString()
-            eventPlaces.text = event.places.toString()
+            //eventPlaces.text = event.places.toString()
         }
     }
 
