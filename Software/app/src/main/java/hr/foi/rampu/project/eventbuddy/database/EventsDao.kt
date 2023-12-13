@@ -58,12 +58,12 @@ class EventsDao {
     }
 
     fun getEventByName(eventName: String): Event? {
-        val sql = "SELECT * FROM dogadaj WHERE naziv='${eventName}'";
+        val sql = "SELECT * FROM dogadaj WHERE naziv='${eventName}'"
         Log.e("SQL",sql)
-        val set = Database.execute(sql);
+        val set = Database.execute(sql)
         var eventDobiven: Event? = null
         while(set.next()){
-            val eventDobiven = Event(
+            eventDobiven = Event(
                 id = set.getString("ID").toInt(),
                 name = set.getString("naziv"),
                 overview = set.getString("opis"),
