@@ -23,7 +23,7 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
         private val eventTime: TextView
         private val eventLocation: TextView
         private val eventParticipants: TextView
-        private val eventPlaces: TextView
+        private val eventId: TextView
 
         init {
             eventName = view.findViewById(R.id.tv_event_name)
@@ -31,7 +31,7 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
             eventTime = view.findViewById(R.id.tv_event_time)
             eventLocation = view.findViewById(R.id.tv_event_location)
             eventParticipants = view.findViewById(R.id.tv_event_participants)
-            eventPlaces = view.findViewById(R.id.tv_event_places)
+            eventId = view.findViewById(R.id.tv_event_id)
 
             view.setOnClickListener {
                 val intent = Intent(view.context, EventDetails::class.java)
@@ -47,7 +47,7 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
             eventTime.text = sdfTime.format(event.time)
             eventLocation.text = event.location
             eventParticipants.text = event.participants.toString()
-            //eventPlaces.text = event.places.toString()
+            eventId.text = event.id.toString()
         }
     }
 
