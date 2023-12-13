@@ -60,6 +60,13 @@ class EditEventDialogHelper(private val view: View) {
         val location = view.findViewById<TextView>(R.id.et_edit_event_dialog_location).text.toString()
         val overview = view.findViewById<TextView>(R.id.et_edit_event_dialog_overview).text.toString()
 
-        return Event(id, eventName, overview,selectedDateTime.time, selectedDateTime.time, location, 1, 1, 1)
+        if(sdfDate.format(selectedDateTime.time) == view.findViewById<TextView>(R.id.et_edit_event_dialog_date).text.toString()){
+            return Event(id, eventName, overview, selectedDateTime.time, selectedDateTime.time, location, 1, 1, 1)
+        }else{
+            val date = view.findViewById<TextView>(R.id.et_edit_event_dialog_date).text.toString()
+            val time = view.findViewById<TextView>(R.id.et_edit_event_dialog_time).text.toString()
+            val dateParsiran = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ENGLISH).parse(date + " " + time)
+            return Event(id, eventName, overview, dateParsiran, dateParsiran, location, 1, 1, 1)
+        }
     }
 }
