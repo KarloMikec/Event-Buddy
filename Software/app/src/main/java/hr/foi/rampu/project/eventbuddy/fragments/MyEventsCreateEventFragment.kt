@@ -7,13 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.adapters.EventsAdapter
+import hr.foi.rampu.project.eventbuddy.database.EventsDao
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 import hr.foi.rampu.project.eventbuddy.helpers.NewEventDialogHelper
 
 class MyEventsCreateEventFragment : Fragment() {
+    private lateinit var recyclerView: RecyclerView
     private lateinit var btnCreateNewEvent: FloatingActionButton
+    private lateinit var eventsDao: EventsDao
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +35,15 @@ class MyEventsCreateEventFragment : Fragment() {
         btnCreateNewEvent.setOnClickListener {
             showDialog()
         }
+
+        eventsDao = EventsDao()
+        recyclerView = view.findViewById(R.id.rv_created_events)
+        recyclerView.adapter = EventsAdapter(
+            eventsDao
+                .getUserEvents(LoggedInUser.user!!)
+                .toMutableList()
+        )
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
     }
 
     fun showDialog(){
@@ -48,5 +64,17 @@ class MyEventsCreateEventFragment : Fragment() {
             .show()
 
         dialogHelper.activateDateTimeListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        eventsDao = EventsDao()
+        recyclerView = requireView().findViewById(R.id.rv_created_events)
+        recyclerView.adapter = EventsAdapter(
+            eventsDao
+                .getUserEvents(LoggedInUser.user!!)
+                .toMutableList()
+        )
+        recyclerView.layoutManager = LinearLayoutManager(requireView().context)
     }
 }

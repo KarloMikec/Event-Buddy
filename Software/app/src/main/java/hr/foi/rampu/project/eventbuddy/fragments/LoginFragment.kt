@@ -56,11 +56,11 @@ class LoginFragment : Fragment() {
             }
 
             else -> {
-                var user = usersDao.getUserByUsername(korisnik_prijava.text.toString().trim())
+                val user = usersDao.getUserByUsername(korisnik_prijava.text.toString().trim())
                 if(user == null) {
                     korisnik_prijava.setError("Unesite točno korisničko ime!")
                 }
-                else if (user.username == korisnik_lozinka.text.toString().trim()) {
+                else if (user.password == korisnik_lozinka.text.toString().trim()) {
                     Toast.makeText(context, "Uspješna prijava", Toast.LENGTH_SHORT).show()
                     MockDataLoader.logedInUser = user
                     LoggedInUser.user = user

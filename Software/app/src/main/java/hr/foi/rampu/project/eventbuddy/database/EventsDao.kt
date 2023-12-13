@@ -2,6 +2,7 @@ package hr.foi.rampu.project.eventbuddy.database
 
 import android.util.Log
 import hr.foi.rampu.project.eventbuddy.entities.Event
+import hr.foi.rampu.project.eventbuddy.entities.User
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -120,5 +121,95 @@ class EventsDao {
         """.trimIndent()
         Log.e("SQL",sql)
         Database.executeUpdate(sql)
+    }
+
+    fun getUserEvents(user: User): List<Event> {
+        val sql = "SELECT * FROM dogadaj WHERE ID_korisnik = ${user.id} ORDER BY datum DESC"
+        val set = Database.execute(sql)
+        val list: MutableList<Event> = mutableListOf()
+
+        while(set.next()){
+            val event = Event(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv"),
+                overview = set.getString("opis"),
+                date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                location = set.getString("mjesto"),
+                categoryId = set.getString("ID_kategorija").toInt(),
+                statusId = set.getString("ID_status").toInt(),
+                userId = set.getString("ID_korisnik").toInt()
+            )
+            list += event
+        }
+        return list
+    }
+
+    fun getUserSubscribedHistoryEvents(user: User): List<Event> {
+        val sql = """
+            SELECT * FROM
+                dogadaj
+            RIGHT JOIN sudionici
+            ON
+                dogadaj.ID = sudionici.ID_dogadaj
+            WHERE
+                sudionici.ID_korisnik = ${user.id} AND
+                CAST(datum as date) <= CAST(GETDATE() as date)
+        """.trimIndent()
+        val set = Database.execute(sql)
+        val list: MutableList<Event> = mutableListOf()
+
+        while(set.next()){
+            val event = Event(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv"),
+                overview = set.getString("opis"),
+                date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                location = set.getString("mjesto"),
+                categoryId = set.getString("ID_kategorija").toInt(),
+                statusId = set.getString("ID_status").toInt(),
+                userId = set.getString("ID_korisnik").toInt()
+            )
+            list += event
+        }
+        return list
+    }
+
+    fun getUserSubscribedUpcomingEvents(user: User): List<Event> {
+        val sql = """
+            SELECT * FROM
+                dogadaj
+            RIGHT JOIN sudionici
+            ON
+                dogadaj.ID = sudionici.ID_dogadaj
+            WHERE
+                sudionici.ID_korisnik = ${user.id} AND
+                CAST(datum as date) > CAST(GETDATE() as date)
+        """.trimIndent()
+        val set = Database.execute(sql)
+        val list: MutableList<Event> = mutableListOf()
+
+        while(set.next()){
+            val event = Event(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv"),
+                overview = set.getString("opis"),
+                date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                location = set.getString("mjesto"),
+                categoryId = set.getString("ID_kategorija").toInt(),
+                statusId = set.getString("ID_status").toInt(),
+                userId = set.getString("ID_korisnik").toInt()
+            )
+            list += event
+        }
+        return list
     }
 }
