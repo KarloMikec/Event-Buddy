@@ -12,7 +12,11 @@ object Database {
     private var con: Connection? = null
 
     fun execute(sql:String): ResultSet{
-        return this.connectToDatabase()!!.createStatement().executeQuery(sql);
+        return this.connectToDatabase()!!.createStatement().executeQuery(sql)
+    }
+
+    fun executeUpdate(sql: String){
+        this.connectToDatabase()!!.createStatement().executeUpdate(sql)
     }
 
     fun connectToDatabase(): Connection? {

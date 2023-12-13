@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class EventsDao {
+    private val sdfDate: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+    private val sdfTime: SimpleDateFormat = SimpleDateFormat("hh:mm:ss", Locale.ENGLISH)
+
     fun getAllEvents(includePast: Boolean = false): List<Event> {
         // TODO("Napraviti da se ne prikazuju događaji ulogiranog korisnika")
         var sql = "SELECT * FROM dogadaj"
@@ -79,5 +82,43 @@ class EventsDao {
             return eventDobiven
         }
         return eventDobiven
+    }
+
+    fun getEventById(eventId: Int): Event? {
+        val sql = "SELECT * FROM dogadaj WHERE ID=${eventId}"
+        Log.e("SQL",sql)
+        val set = Database.execute(sql)
+        var eventDobiven: Event? = null
+        while(set.next()){
+            eventDobiven = Event(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv"),
+                overview = set.getString("opis"),
+                date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                location = set.getString("mjesto"),
+                categoryId = set.getString("ID_kategorija").toInt(),
+                statusId = set.getString("ID_status").toInt(),
+                userId = set.getString("ID_korisnik").toInt()
+            )
+            return eventDobiven
+        }
+        return eventDobiven
+    }
+
+    fun updateEvent(event: Event){
+        val sql = """
+            UPDATE dogadaj SET
+                naziv = '${event.name}',
+                opis = '${event.overview}',
+                mjesto = '${event.location}',
+                datum = '${sdfDate.format(event.date)} ${sdfTime.format(event.time)}'
+                WHERE
+                id = ${event.id}
+        """.trimIndent()
+        Log.e("SQL",sql)
+        Database.executeUpdate(sql)
     }
 }

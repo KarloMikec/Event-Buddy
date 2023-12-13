@@ -1,6 +1,8 @@
 package hr.foi.rampu.project.eventbuddy.adapters
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.activities.EventDetails
+import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.entities.Event
+import hr.foi.rampu.project.eventbuddy.helpers.EditEventDialogHelper
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class EventsAdapter(private val eventsList: MutableList<Event>) :
     RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
+    private var eventsDao: EventsDao = EventsDao()
+
     inner class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val sdfDate: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH)
         private val sdfTime: SimpleDateFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
@@ -38,6 +44,38 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
                 intent.putExtra("eventId", ""+eventName.text.toString())
                 intent.putExtra("eventName", ""+eventName.text.toString())
                 view.context.startActivity(intent)
+            }
+
+            view.setOnLongClickListener {
+                val editTaskDialogView = LayoutInflater
+                    .from(view.context)
+                    .inflate(R.layout.edit_event_dialog, null)
+
+                val eventId = this.eventId.text.toString().toInt()
+
+                val dobivenEvent = eventsDao.getEventById(eventId)
+                val dialogHelper = EditEventDialogHelper(editTaskDialogView)
+
+                Log.e("DOBIVEN_EVENT", dobivenEvent!!.name)
+
+                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_eventName).text = dobivenEvent.name
+                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_date).text = sdfDate.format(dobivenEvent.date)
+                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_time).text = sdfTime.format(dobivenEvent.time)
+                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_location).text = dobivenEvent.location
+                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_overview).text = dobivenEvent.overview
+
+                AlertDialog.Builder(view.context)
+                    .setView(editTaskDialogView)
+                    .setTitle("Uredi događaj")
+                    .setPositiveButton("Uredi") { _, _ ->
+                        val updatedEvent = dialogHelper.buildEvent(eventId)
+                        eventsDao.updateEvent(updatedEvent)
+                    }
+                    .setNegativeButton("Odustani"){ _, _ ->}
+                    .show()
+
+                dialogHelper.activateDateTimeListeners()
+                true
             }
         }
 
