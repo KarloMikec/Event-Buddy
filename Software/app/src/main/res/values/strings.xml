@@ -23,4 +23,16 @@
     <string name="Unesi_staru_lozinku">Unesi staru lozinku</string>
     <string name="Nova_lozinka">Nova lozinka</string>
     <string name="po_etni_ekran">Početni ekran</string>
+    <string name="Detalji_događaja">Detalji događaja</string>
+    <string name="Naziv_događaja">Naziv događaja</string>
+    <string name="Opis">Opis događaja</string>
+    <string name="Mjesto">Mjesto događaja</string>
+    <string name="Vrijeme">Vrijeme događaja</string>
+    <string name="Datum">Datum događaja</string>
+    <string name="Broj_sudionika">Broj sudionika</string>
+    <string name="Prijavi_se">Prijavi se</string>
+    <string name="Odjavi_se">Odjavi se</string>
+    <string name="Pretplati_me">Pretplati me</string>
+    <string name="Sudionici">Sudionici</string>
+    <string name="Natrag">Natrag</string>
 </resources>

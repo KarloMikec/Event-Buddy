@@ -1,11 +1,13 @@
 package hr.foi.rampu.project.eventbuddy.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.activities.EventDetails
 import hr.foi.rampu.project.eventbuddy.entities.Event
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -30,6 +32,13 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
             eventLocation = view.findViewById(R.id.tv_event_location)
             eventParticipants = view.findViewById(R.id.tv_event_participants)
             eventPlaces = view.findViewById(R.id.tv_event_places)
+
+            view.setOnClickListener {
+                val intent = Intent(view.context, EventDetails::class.java)
+                intent.putExtra("eventId", ""+eventName.text.toString())
+                intent.putExtra("eventName", ""+eventName.text.toString())
+                view.context.startActivity(intent)
+            }
         }
 
         fun bind(event: Event) {

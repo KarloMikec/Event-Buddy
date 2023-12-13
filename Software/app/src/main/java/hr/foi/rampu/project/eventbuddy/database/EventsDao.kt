@@ -56,4 +56,28 @@ class EventsDao {
         }
         return 0
     }
+
+    fun getEventByName(eventName: String): Event? {
+        val sql = "SELECT * FROM dogadaj WHERE naziv='${eventName}'";
+        Log.e("SQL",sql)
+        val set = Database.execute(sql);
+        var eventDobiven: Event? = null
+        while(set.next()){
+            val eventDobiven = Event(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv"),
+                overview = set.getString("opis"),
+                date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+                    .parse(set.getString("datum"))!!,
+                location = set.getString("mjesto"),
+                categoryId = set.getString("ID_kategorija").toInt(),
+                statusId = set.getString("ID_status").toInt(),
+                userId = set.getString("ID_korisnik").toInt()
+            )
+            return eventDobiven
+        }
+        return eventDobiven
+    }
 }
