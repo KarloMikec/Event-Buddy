@@ -39,15 +39,15 @@ class EditFragment : Fragment() {
             val korisnickoIme = view.findViewById<TextInputEditText>(R.id.korime_uredi_profil).text.toString()
             val staraLozinka = view.findViewById<TextInputEditText>(R.id.user_lozinka_uredi_profil).text.toString()
             val novaLozinka = view.findViewById<TextInputEditText>(R.id.user_lozinka_potvrdi_uredi_profil).text.toString()
-            val postojeciUser = MockDataLoader.getDemoUsers().find { x -> x.korime == korisnickoIme }
-            if(postojeciUser!!.lozinka == staraLozinka){
+            val postojeciUser = MockDataLoader.logedInUser
+            if(postojeciUser!!.password == staraLozinka){
                 if(novaLozinka == ""){
-                    MockDataLoader.spremiNovePodatke(User(ime, prezime, korisnickoIme, staraLozinka, postojeciUser!!.pravo))
+                    MockDataLoader.spremiNovePodatke(User(postojeciUser.id, ime, prezime, korisnickoIme, staraLozinka, postojeciUser.warnings))
                     Toast.makeText(context, "Uspješno spremljeni podaci!", Toast.LENGTH_SHORT).show()
                     popuniInputeSaStarimPodacima()
                 }else {
                     if(novaLozinka.length >= 8){
-                        MockDataLoader.spremiNovePodatke(User(ime, prezime, korisnickoIme, novaLozinka, postojeciUser!!.pravo))
+                        MockDataLoader.spremiNovePodatke(User(postojeciUser.id, ime, prezime, korisnickoIme, novaLozinka, postojeciUser.warnings))
                         Toast.makeText(context, "Uspješno spremljeni podaci!", Toast.LENGTH_SHORT).show()
                         Toast.makeText(context, "Spremljena nova lozinka!", Toast.LENGTH_SHORT).show()
                         popuniInputeSaStarimPodacima()
@@ -63,9 +63,9 @@ class EditFragment : Fragment() {
 
     private fun popuniInputeSaStarimPodacima(){
         val prijavljenUser = MockDataLoader.logedInUser
-        view?.findViewById<TextInputEditText>(R.id.ime_uredi_profil)?.setText(prijavljenUser?.ime)
-        view?.findViewById<TextInputEditText>(R.id.prezime_uredi_profil)?.setText(prijavljenUser?.prezime)
-        view?.findViewById<TextInputEditText>(R.id.korime_uredi_profil)?.setText(prijavljenUser?.korime)
+        view?.findViewById<TextInputEditText>(R.id.ime_uredi_profil)?.setText(prijavljenUser?.name)
+        view?.findViewById<TextInputEditText>(R.id.prezime_uredi_profil)?.setText(prijavljenUser!!.surname)
+        view?.findViewById<TextInputEditText>(R.id.korime_uredi_profil)?.setText(prijavljenUser!!.username)
         view?.findViewById<TextInputEditText>(R.id.user_lozinka_uredi_profil)?.setText("")
         view?.findViewById<TextInputEditText>(R.id.user_lozinka_potvrdi_uredi_profil)?.setText("")
     }

@@ -77,7 +77,7 @@ class RegistrationFragment : Fragment() {
                 if(lozinka.text.toString().length >= 8){
                     if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
                         Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
-                        val novi = User(ime.text.toString(), prezime.text.toString(), korisnickoIme.text.toString(), lozinka.text.toString(), false)
+                        val novi = User(0,ime.text.toString(), prezime.text.toString(), korisnickoIme.text.toString(), lozinka.text.toString(), 0)
                         MockDataLoader.registerUser(novi)
                         val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)

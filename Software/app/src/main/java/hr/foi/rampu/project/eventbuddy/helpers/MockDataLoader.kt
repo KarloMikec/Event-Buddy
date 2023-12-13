@@ -2,14 +2,13 @@ package hr.foi.rampu.project.eventbuddy.helpers
 
 import hr.foi.rampu.project.eventbuddy.entities.Event
 import hr.foi.rampu.project.eventbuddy.entities.User
-import java.util.Date
 
 object MockDataLoader {
 
 
     val mutableList: MutableList<Event> = mutableListOf()
 
-    val registeredUsers: MutableList<User> = mutableListOf(User("Karlo", "Mikec", "admin", "admin", true ))
+    val registeredUsers: MutableList<User> = mutableListOf(User(1,"Karlo", "Mikec", "admin", "admin", 0 ))
 
     var logedInUser: User? = null
 
@@ -29,15 +28,15 @@ object MockDataLoader {
         registeredUsers.add(user)
     }
     fun provjeriAkoPostoji(korime: String): Boolean{
-        val dobiveniUser = getDemoUsers().find { x -> x.korime == korime}
+        val dobiveniUser = getDemoUsers().find { x -> x.username == korime}
         return dobiveniUser != null
     }
     fun provjeriLozinku(korime: String, lozinka: String): Boolean{
-        val dobiveniUser = getDemoUsers().find { x -> x.korime == korime}
+        val dobiveniUser = getDemoUsers().find { x -> x.username == korime}
         if(dobiveniUser == null){
             return false
         }
-        if(dobiveniUser.lozinka == lozinka){
+        if(dobiveniUser.password == lozinka){
             logedInUser = dobiveniUser
             return true
         }
@@ -45,7 +44,7 @@ object MockDataLoader {
     }
 
     fun spremiNovePodatke(noviPodaciUser: User){
-        val stariPodaciUser = getDemoUsers().find { x -> x.korime == noviPodaciUser.korime}
+        val stariPodaciUser = getDemoUsers().find { x -> x.username == noviPodaciUser.username}
         getDemoUsers().remove(stariPodaciUser)
         getDemoUsers().add(noviPodaciUser)
         logedInUser = noviPodaciUser

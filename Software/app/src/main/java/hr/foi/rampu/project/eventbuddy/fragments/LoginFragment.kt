@@ -13,12 +13,15 @@ import android.widget.EditText
 import android.widget.Toast
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.activities.StartScreen
+import hr.foi.rampu.project.eventbuddy.database.UsersDao
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 
 class LoginFragment : Fragment() {
     private lateinit var korisnik_prijava: EditText
     private lateinit var korisnik_lozinka: EditText
+    private lateinit var usersDao: UsersDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,7 @@ class LoginFragment : Fragment() {
     }
     private fun provjeraUnosaLogin(){
 
+        usersDao = UsersDao()
         when {
             TextUtils.isEmpty(korisnik_prijava.text.toString().trim()) -> {
                 korisnik_prijava.setError("Unesite korisničko ime!")
@@ -50,16 +54,20 @@ class LoginFragment : Fragment() {
             TextUtils.isEmpty(korisnik_lozinka.text.toString().trim()) -> {
                 korisnik_lozinka.setError("Ponovno unesite lozinku!")
             }
-            MockDataLoader.provjeriLozinku(korisnik_prijava.text.toString().trim(), korisnik_lozinka.text.toString().trim()) -> {
-                Toast.makeText(context, "Uspješna prijava", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(context, StartScreen::class.java)
-                startActivity(intent)
-            }
             else -> {
-                if(!MockDataLoader.provjeriAkoPostoji(korisnik_prijava.text.toString().trim())) {
+                var user = usersDao.getUserByUsername(korisnik_prijava.text.toString().trim())
+                if(user == null) {
                     korisnik_prijava.setError("Unesite točno korisničko ime!")
-                } else {
+                }
+                else if (user.username == korisnik_lozinka.text.toString().trim()) {
+                    Toast.makeText(context, "Uspješna prijava", Toast.LENGTH_SHORT).show()
+                    MockDataLoader.logedInUser = user
+                    LoggedInUser.user = user
+                    val intent = Intent(context, StartScreen::class.java)
+                    startActivity(intent)
+                }
+                else {
                     korisnik_lozinka.setError("Unesite točnu lozinku!")
                 }
             }
