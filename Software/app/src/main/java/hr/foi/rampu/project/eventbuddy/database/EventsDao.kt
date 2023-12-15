@@ -212,4 +212,28 @@ class EventsDao {
         }
         return list
     }
+
+    fun getAllParticipantsOnEvent(eventID: String?): List<User> {
+        val sql = """select 
+                    ID, korime, ime, prezime, lozinka, upozorenja 
+                    from sudionici 
+                    LEFT JOIN korisnik ON ID = ID_korisnik
+                    WHERE 
+                    ID_dogadaj = ${eventID}"""
+        val set = Database.execute(sql)
+        val list: MutableList<User> = mutableListOf()
+
+        while(set.next()){
+            val user = User(
+                id = set.getString("ID").toInt(),
+                username = set.getString("korime"),
+                name = set.getString("ime"),
+                surname = set.getString("prezime"),
+                password = set.getString("lozinka"),
+                warnings = set.getString("upozorenja").toInt(),
+            )
+            list += user
+        }
+        return list
+    }
 }

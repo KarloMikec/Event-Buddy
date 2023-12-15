@@ -41,7 +41,7 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
 
             view.setOnClickListener {
                 val intent = Intent(view.context, EventDetails::class.java)
-                intent.putExtra("eventId", ""+eventName.text.toString())
+                intent.putExtra("eventId", ""+eventId.text.toString())
                 intent.putExtra("eventName", ""+eventName.text.toString())
                 view.context.startActivity(intent)
             }

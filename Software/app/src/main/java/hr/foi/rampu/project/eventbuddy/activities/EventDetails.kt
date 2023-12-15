@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
+import hr.foi.rampu.project.eventbuddy.database.UsersDao
 
 class EventDetails : AppCompatActivity() {
     val edao = EventsDao()
@@ -15,6 +19,7 @@ class EventDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
         val eventName = intent.getStringExtra("eventName")
+        val eventID = intent.getStringExtra("eventId")
 
         val dobivenEvent = edao.getEventByName(eventName.toString())!!
         Log.e("EVENT", ""+dobivenEvent.name)
@@ -28,6 +33,34 @@ class EventDetails : AppCompatActivity() {
             val intent = Intent(this, StartScreen::class.java)
             startActivity(intent)
             finish()
+        }
+
+        val buttonClick2 = findViewById<Button>(R.id.btn_event_details_number_of_participants)
+        buttonClick2.setOnClickListener{
+            val korisnici =  edao.getAllParticipantsOnEvent(eventID)
+            Log.e("KORISNICI", korisnici.toString())
+
+            val layout = LinearLayout(this)
+            layout.orientation = LinearLayout.VERTICAL
+
+            for (k in korisnici) {
+                val button = Button(this)
+                button.isAllCaps = false
+                button.text = k.name + " " + k.surname
+                button.setOnClickListener {
+                    Toast.makeText(this, "Odabran: ${k.name} ${k.surname} ${k.id} ", Toast.LENGTH_SHORT).show()
+                }
+                layout.addView(button)
+            }
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Sudionici")
+            builder.setView(layout)
+            builder.setNegativeButton("Odustani") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
         }
     }
 }
