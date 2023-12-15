@@ -21,7 +21,7 @@ class EventDetails : AppCompatActivity() {
         val eventName = intent.getStringExtra("eventName")
         val eventID = intent.getStringExtra("eventId")
 
-        val dobivenEvent = edao.getEventByName(eventName.toString())!!
+        val dobivenEvent = edao.getEventById(eventID!!.toInt())!!
         Log.e("EVENT", ""+dobivenEvent.name)
         findViewById<TextView>(R.id.tv_event_details_title).text = dobivenEvent.name
         findViewById<TextView>(R.id.tv_event_details_location).text = dobivenEvent.location
