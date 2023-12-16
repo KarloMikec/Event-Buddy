@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.adapters.HomepageEventsAdapter
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 
 class MyEventsFragment : Fragment() {
     lateinit var my_events_nav: TabLayout
@@ -59,11 +60,13 @@ class MyEventsFragment : Fragment() {
                 MyEventsHistoryFragment::class
             )
         )
-        my_events_adapter.addFragment(
-            HomepageEventsAdapter.FragmentItem(
-                "Vlastiti",
-                MyEventsCreateEventFragment::class
+        if (LoggedInUser.user!!.IsOrganizer()) {
+            my_events_adapter.addFragment(
+                HomepageEventsAdapter.FragmentItem(
+                    "Vlastiti",
+                    MyEventsCreateEventFragment::class
+                )
             )
-        )
+        }
     }
 }

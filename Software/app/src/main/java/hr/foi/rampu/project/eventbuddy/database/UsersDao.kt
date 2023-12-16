@@ -1,11 +1,12 @@
 package hr.foi.rampu.project.eventbuddy.database
 
+import hr.foi.rampu.project.eventbuddy.entities.Role
 import hr.foi.rampu.project.eventbuddy.entities.User
 
 class UsersDao {
 
     fun getUserByUsername(username: String): User? {
-        var sql = "SELECT * FROM korisnik WHERE korime = '${username}'"
+        val sql = "SELECT * FROM korisnik WHERE korime = '${username}'"
         val set = Database.execute(sql)
         while (set.next()){
             return User(
@@ -19,5 +20,27 @@ class UsersDao {
         }
         return null
     }
-   // fun updateUser(user: User)
+
+    fun getRoles(id: Int): List<Role> {
+        val sql = """
+            SELECT uloga.ID, uloga.Naziv
+            FROM uloga, uloge, korisnik
+            WHERE
+                uloge.ID_korisnik = korisnik.ID AND
+                uloge.ID_uloga = uloga.ID AND
+                korisnik.ID = ${id}
+        """.trimIndent()
+
+        val set = Database.execute(sql)
+        val roles: MutableList<Role> = mutableListOf()
+
+        while(set.next()){
+            val role = Role(
+                id = set.getString("ID").toInt(),
+                name = set.getString("naziv")
+            )
+            roles += role
+        }
+        return roles
+    }
 }
