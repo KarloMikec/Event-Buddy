@@ -36,14 +36,7 @@ class MyEventsCreateEventFragment : Fragment() {
             showDialog()
         }
 
-        eventsDao = EventsDao()
-        recyclerView = view.findViewById(R.id.rv_created_events)
-        recyclerView.adapter = EventsAdapter(
-            eventsDao
-                .getUserEvents(LoggedInUser.user!!)
-                .toMutableList()
-        )
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        showEvents()
     }
 
     fun showDialog(){
@@ -68,6 +61,10 @@ class MyEventsCreateEventFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        showEvents()
+    }
+
+    private fun showEvents() {
         eventsDao = EventsDao()
         recyclerView = requireView().findViewById(R.id.rv_created_events)
         recyclerView.adapter = EventsAdapter(
