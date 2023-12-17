@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
-import hr.foi.rampu.project.eventbuddy.database.UsersDao
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 
 class EventDetails : AppCompatActivity() {
     val edao = EventsDao()
@@ -61,6 +61,21 @@ class EventDetails : AppCompatActivity() {
             }
             val dialog = builder.create()
             dialog.show()
+        }
+
+        val buttonSubscribe = findViewById<Button>(R.id.btn_event_details_subscribe)
+        var isSubbed: Boolean = edao.isUserSubscribedOnEvent(LoggedInUser.user!!.id, dobivenEvent.id)
+        buttonSubscribe.text = if (isSubbed) "Napusti događaj" else "Pretplati se"
+        buttonSubscribe.setOnClickListener {
+            if (isSubbed) {
+                edao.unsubscribeUserOnEvent(LoggedInUser.user!!, dobivenEvent)
+                buttonSubscribe.text = "Pretplati se"
+
+            } else {
+                edao.subscribeUserOnEvent(LoggedInUser.user!!, dobivenEvent)
+                buttonSubscribe.text = "Napusti događaj"
+            }
+            isSubbed = !isSubbed
         }
     }
 }

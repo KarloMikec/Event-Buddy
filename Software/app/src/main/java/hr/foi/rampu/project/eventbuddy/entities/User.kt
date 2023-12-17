@@ -1,5 +1,6 @@
 package hr.foi.rampu.project.eventbuddy.entities
 
+import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.database.UsersDao
 
 class User(
@@ -12,6 +13,7 @@ class User(
 ) {
     private var rolesInstance: List<Role>? = null
     private var usersDao: UsersDao = UsersDao()
+
     val roles: List<Role>
         get() {
             if (rolesInstance == null) {

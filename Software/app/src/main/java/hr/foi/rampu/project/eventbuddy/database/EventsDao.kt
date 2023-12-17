@@ -236,4 +236,27 @@ class EventsDao {
         }
         return list
     }
+
+    fun isUserSubscribedOnEvent(idUser: Int, idEvent: Int): Boolean {
+        val sql = """SELECT * FROM
+                        sudionici
+                    WHERE
+                        ID_dogadaj = ${idEvent} AND
+                        ID_korisnik = ${idUser}
+                """.trimMargin()
+        val set = Database.execute(sql)
+        var rows: Int = 0
+        while(set.next()){
+            rows++
+        }
+        return rows > 0
+    }
+
+    fun subscribeUserOnEvent(user: User, event: Event) {
+        Database.executeUpdate("INSERT INTO sudionici VALUES(${event.id}, ${user.id})")
+    }
+
+    fun unsubscribeUserOnEvent(user: User, event: Event) {
+        Database.executeUpdate("DELETE FROM sudionici WHERE ID_dogadaj=${event.id} AND ID_korisnik = ${user.id}")
+    }
 }
