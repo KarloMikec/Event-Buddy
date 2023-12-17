@@ -51,7 +51,8 @@ class MyEventsCreateEventFragment : Fragment() {
             .setPositiveButton("Kreiraj") { _, _ ->
                 val newEvent = dialogHelper.buildEvent()
                 Log.d("TAG", newEvent.name + " " + newEvent.location + " " + newEvent.date + " " + newEvent.time)
-                MockDataLoader.addEvent(newEvent)
+                eventsDao.addEvent(newEvent)
+                showEvents()
             }
             .setNegativeButton("Odustani"){ _, _ ->}
             .show()

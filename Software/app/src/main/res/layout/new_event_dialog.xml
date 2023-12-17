@@ -43,11 +43,12 @@
         />
 
     <EditText
-        android:id="@+id/et_new_event_dialog_places"
+        android:id="@+id/et_new_event_dialog_overview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Broj sudionika..."
-        android:inputType="number"
+        android:hint="Opis..."
+        android:inputType="textMultiLine"
+        android:lines="5"
         android:layout_marginBottom="15dp"
         />
 
