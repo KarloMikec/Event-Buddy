@@ -259,4 +259,22 @@ class EventsDao {
     fun unsubscribeUserOnEvent(user: User, event: Event) {
         Database.executeUpdate("DELETE FROM sudionici WHERE ID_dogadaj=${event.id} AND ID_korisnik = ${user.id}")
     }
+
+    fun addEvent(newEvent: Event) {
+        val sql = """INSERT INTO 
+                dogadaj 
+                    (naziv, opis, mjesto, datum, ID_korisnik, ID_kategorija)
+                VALUES
+                    (
+                    '${newEvent.name}', 
+                    '${newEvent.overview}',
+                    '${newEvent.location}',
+                    '${sdfDate.format(newEvent.date)} ${sdfTime.format(newEvent.time)}',
+                    ${newEvent.userId},
+                    ${newEvent.categoryId}
+                    )
+                    """.trimMargin()
+        Log.e("SQL",sql)
+        Database.executeUpdate(sql)
+    }
 }

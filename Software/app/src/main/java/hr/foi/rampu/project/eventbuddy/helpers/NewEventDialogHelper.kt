@@ -56,18 +56,10 @@ class NewEventDialogHelper(private val view: View) {
     }
 
     fun buildEvent(): Event {
-        val eventName = view.findViewById<EditText>(R.id.et_new_event_dialog_eventName)
-        val location = view.findViewById<EditText>(R.id.et_new_event_dialog_location)
-        val participants = 0
-        val places = view.findViewById<EditText>(R.id.et_new_event_dialog_places)
+        val eventName = view.findViewById<EditText>(R.id.et_new_event_dialog_eventName).text.toString()
+        val eventLocation = view.findViewById<EditText>(R.id.et_new_event_dialog_location).text.toString()
+        val eventOverview = view.findViewById<EditText>(R.id.et_new_event_dialog_overview).text.toString()
 
-        val eventNameText = eventName.text.toString()
-        val locationText = location.text.toString()
-        var placesInt = 0
-        if(places.text.toString() != ""){
-            placesInt = Integer.parseInt(places.text.toString())
-        }
-        // return Event(eventNameText, selectedDateTime.time, selectedDateTime.time, locationText, participants, placesInt)
-        return Event(0, eventNameText, "",selectedDateTime.time, selectedDateTime.time, locationText, 1, 1, 1)
+        return Event(0, eventName, eventOverview,selectedDateTime.time, selectedDateTime.time, eventLocation, 1, LoggedInUser.user!!.id, 1)
     }
 }
