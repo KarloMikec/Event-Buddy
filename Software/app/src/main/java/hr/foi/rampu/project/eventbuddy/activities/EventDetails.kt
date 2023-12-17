@@ -1,9 +1,11 @@
 package hr.foi.rampu.project.eventbuddy.activities
 
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
+import java.time.LocalDate
+import java.util.Date
 
 class EventDetails : AppCompatActivity() {
     val edao = EventsDao()
@@ -64,18 +68,26 @@ class EventDetails : AppCompatActivity() {
         }
 
         val buttonSubscribe = findViewById<Button>(R.id.btn_event_details_subscribe)
+        val buttonParticipants = findViewById<TextView>(R.id.btn_event_details_number_of_participants)
+
         var isSubbed: Boolean = edao.isUserSubscribedOnEvent(LoggedInUser.user!!.id, dobivenEvent.id)
+        if (isDateInPast(dobivenEvent.date)) buttonSubscribe.visibility = View.GONE
         buttonSubscribe.text = if (isSubbed) "Napusti događaj" else "Pretplati se"
         buttonSubscribe.setOnClickListener {
             if (isSubbed) {
                 edao.unsubscribeUserOnEvent(LoggedInUser.user!!, dobivenEvent)
                 buttonSubscribe.text = "Pretplati se"
-
             } else {
                 edao.subscribeUserOnEvent(LoggedInUser.user!!, dobivenEvent)
                 buttonSubscribe.text = "Napusti događaj"
             }
             isSubbed = !isSubbed
+            buttonParticipants.text = "Sudionici:${edao.getNumberOfParticipants(dobivenEvent.id)}"
         }
+    }
+
+    private fun isDateInPast(date: Date): Boolean {
+        val currentDate = Date()
+        return date.before(currentDate)
     }
 }
