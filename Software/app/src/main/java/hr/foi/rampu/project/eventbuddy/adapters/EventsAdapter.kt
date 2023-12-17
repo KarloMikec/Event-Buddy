@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.activities.EventDetails
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.entities.Event
 import hr.foi.rampu.project.eventbuddy.helpers.EditEventDialogHelper
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -47,34 +49,41 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
             }
 
             view.setOnLongClickListener {
-                val editTaskDialogView = LayoutInflater
-                    .from(view.context)
-                    .inflate(R.layout.edit_event_dialog, null)
-
                 val eventId = this.eventId.text.toString().toInt()
-
                 val dobivenEvent = eventsDao.getEventById(eventId)
-                val dialogHelper = EditEventDialogHelper(editTaskDialogView)
+                if(LoggedInUser.user!!.IsOrganizer()){
+                    if(LoggedInUser.user!!.id == dobivenEvent!!.userId){
+                        val editTaskDialogView = LayoutInflater
+                            .from(view.context)
+                            .inflate(R.layout.edit_event_dialog, null)
 
-                Log.e("DOBIVEN_EVENT", dobivenEvent!!.name)
+                        val dialogHelper = EditEventDialogHelper(editTaskDialogView)
 
-                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_eventName).text = dobivenEvent.name
-                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_date).text = sdfDate.format(dobivenEvent.date)
-                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_time).text = sdfTime.format(dobivenEvent.time)
-                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_location).text = dobivenEvent.location
-                editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_overview).text = dobivenEvent.overview
+                        Log.e("DOBIVEN_EVENT", dobivenEvent!!.name)
 
-                AlertDialog.Builder(view.context)
-                    .setView(editTaskDialogView)
-                    .setTitle("Uredi događaj")
-                    .setPositiveButton("Uredi") { _, _ ->
-                        val updatedEvent = dialogHelper.buildEvent(eventId)
-                        eventsDao.updateEvent(updatedEvent)
+                        editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_eventName).text = dobivenEvent.name
+                        editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_date).text = sdfDate.format(dobivenEvent.date)
+                        editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_time).text = sdfTime.format(dobivenEvent.time)
+                        editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_location).text = dobivenEvent.location
+                        editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_overview).text = dobivenEvent.overview
+
+                        AlertDialog.Builder(view.context)
+                            .setView(editTaskDialogView)
+                            .setTitle("Uredi događaj")
+                            .setPositiveButton("Uredi") { _, _ ->
+                                val updatedEvent = dialogHelper.buildEvent(eventId)
+                                eventsDao.updateEvent(updatedEvent)
+                            }
+                            .setNegativeButton("Odustani"){ _, _ ->}
+                            .show()
+
+                        dialogHelper.activateDateTimeListeners()
+                    }else{
+                        Toast.makeText(view.context, "Vi niste organizator ovog događaja!", Toast.LENGTH_SHORT).show()
                     }
-                    .setNegativeButton("Odustani"){ _, _ ->}
-                    .show()
-
-                dialogHelper.activateDateTimeListeners()
+                }else{
+                    Toast.makeText(view.context, "Vi niste organizator!", Toast.LENGTH_SHORT).show()
+                }
                 true
             }
         }
