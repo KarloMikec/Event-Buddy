@@ -12,9 +12,12 @@ import androidx.appcompat.app.AlertDialog
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.database.UsersDao
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class EventDetails : AppCompatActivity() {
     val edao = EventsDao()
+    private val sdfDateTime: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ENGLISH)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
@@ -23,6 +26,7 @@ class EventDetails : AppCompatActivity() {
 
         val dobivenEvent = edao.getEventById(eventID!!.toInt())!!
         Log.e("EVENT", ""+dobivenEvent.name)
+        findViewById<TextView>(R.id.tv_event_details_time_date).text = sdfDateTime.format(dobivenEvent.date)
         findViewById<TextView>(R.id.tv_event_details_title).text = dobivenEvent.name
         findViewById<TextView>(R.id.tv_event_details_location).text = dobivenEvent.location
         findViewById<TextView>(R.id.tv_event_details_overview).text = dobivenEvent.overview
