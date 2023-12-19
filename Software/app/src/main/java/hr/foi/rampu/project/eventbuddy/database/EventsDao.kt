@@ -18,7 +18,7 @@ class EventsDao {
             sql = """
                 SELECT * FROM dogadaj
                 WHERE
-                    CAST(datum as date) > CAST(GETDATE() as date) AND ID_status = 1
+                    CAST(datum as date) >= CAST(GETDATE() as date) AND ID_status = 1
                 ORDER BY
                     datum
             """.trimIndent()
@@ -156,7 +156,7 @@ class EventsDao {
                 dogadaj.ID = sudionici.ID_dogadaj
             WHERE
                 sudionici.ID_korisnik = ${user.id} AND
-                CAST(datum as date) <= CAST(GETDATE() as date)
+                CAST(datum as date) < CAST(GETDATE() as date)
         """.trimIndent()
         val set = Database.execute(sql)
         val list: MutableList<Event> = mutableListOf()
@@ -189,7 +189,7 @@ class EventsDao {
                 dogadaj.ID = sudionici.ID_dogadaj
             WHERE
                 sudionici.ID_korisnik = ${user.id} AND
-                CAST(datum as date) > CAST(GETDATE() as date)
+                CAST(datum as date) >= CAST(GETDATE() as date)
         """.trimIndent()
         val set = Database.execute(sql)
         val list: MutableList<Event> = mutableListOf()
