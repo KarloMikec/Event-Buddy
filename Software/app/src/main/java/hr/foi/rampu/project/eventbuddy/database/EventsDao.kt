@@ -8,7 +8,7 @@ import java.util.Locale
 
 class EventsDao {
     private val sdfDate: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-    private val sdfTime: SimpleDateFormat = SimpleDateFormat("hh:mm:ss", Locale.ENGLISH)
+    private val sdfTime: SimpleDateFormat = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
 
     fun getAllEvents(includePast: Boolean = false): List<Event> {
         // TODO("Napraviti da se ne prikazuju događaji ulogiranog korisnika")
