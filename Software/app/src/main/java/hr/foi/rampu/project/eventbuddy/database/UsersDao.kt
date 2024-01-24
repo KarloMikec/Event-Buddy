@@ -1,5 +1,6 @@
 package hr.foi.rampu.project.eventbuddy.database
 
+import android.util.Log
 import hr.foi.rampu.project.eventbuddy.entities.Role
 import hr.foi.rampu.project.eventbuddy.entities.User
 
@@ -43,4 +44,14 @@ class UsersDao {
         }
         return roles
     }
+
+    fun addUser(user: User){
+        var sql = """
+            INSERT INTO korisnik (korime, ime, prezime, lozinka)
+            VALUES ('${user.username}', '${user.name}', '${user.surname}', '${user.password}')
+        """.trimIndent()
+        Database.executeUpdate(sql)
+    }
+
+
 }
