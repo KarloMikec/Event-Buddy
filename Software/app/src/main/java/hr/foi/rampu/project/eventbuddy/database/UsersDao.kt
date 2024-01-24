@@ -1,13 +1,12 @@
 package hr.foi.rampu.project.eventbuddy.database
 
-import android.util.Log
 import hr.foi.rampu.project.eventbuddy.entities.Role
 import hr.foi.rampu.project.eventbuddy.entities.User
 
 class UsersDao {
 
     fun getUserByUsername(username: String): User? {
-        var sql = "SELECT * FROM korisnik WHERE korime = '${username}'"
+        val sql = "SELECT * FROM korisnik WHERE korime = '${username}'"
         val set = Database.execute(sql)
         while (set.next()){
             return User(
@@ -46,7 +45,7 @@ class UsersDao {
     }
 
     fun addUser(user: User){
-        var sql = """
+        val sql = """
             INSERT INTO korisnik (korime, ime, prezime, lozinka)
             VALUES ('${user.username}', '${user.name}', '${user.surname}', '${user.password}')
         """.trimIndent()

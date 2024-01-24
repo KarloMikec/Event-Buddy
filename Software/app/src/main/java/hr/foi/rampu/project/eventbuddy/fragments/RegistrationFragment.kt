@@ -15,7 +15,6 @@ import hr.foi.rampu.project.eventbuddy.MainActivity
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.UsersDao
 import hr.foi.rampu.project.eventbuddy.entities.User
-import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 
 class RegistrationFragment : Fragment() {
