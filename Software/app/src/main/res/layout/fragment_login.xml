@@ -28,6 +28,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/korisnik_prijava"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

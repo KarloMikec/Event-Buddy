@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.entities.User
+import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
 import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 class EditFragment : Fragment() {
@@ -59,6 +60,10 @@ class EditFragment : Fragment() {
                 Toast.makeText(context, "Unesite točnu staru lozinku!", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val organizer = LoggedInUser.user!!.IsOrganizer()
+        val btnOrganizer = view.findViewById<MaterialButton>(R.id.btn_Organizer)
+        btnOrganizer.visibility = if (organizer) View.GONE else View.VISIBLE
     }
 
     private fun popuniInputeSaStarimPodacima(){
