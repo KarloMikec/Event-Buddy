@@ -35,7 +35,7 @@ class UsersDao {
                         ID_korisnik = ${user.id}
                 """.trimMargin()
         val set = Database.execute(sql)
-        var rows: Int = 0
+        var rows = 0
         while(set.next()){
             rows++
         }
@@ -87,5 +87,16 @@ class UsersDao {
         Database.executeUpdate(sql)
     }
 
-
+    fun updateUser(user: User, ime: String, prezime: String, lozinka: String){
+        val sql = """
+            UPDATE korisnik
+            SET
+                ime = '${ime}',
+                prezime = '${prezime}',
+                lozinka = '${lozinka}'
+            WHERE
+                ID = ${user.id}
+        """.trimIndent()
+        Database.executeUpdate(sql)
+    }
 }
