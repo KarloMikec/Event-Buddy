@@ -13,8 +13,8 @@ import android.widget.EditText
 import android.widget.Toast
 import hr.foi.rampu.project.eventbuddy.MainActivity
 import hr.foi.rampu.project.eventbuddy.R
+import hr.foi.rampu.project.eventbuddy.database.UsersDao
 import hr.foi.rampu.project.eventbuddy.entities.User
-import hr.foi.rampu.project.eventbuddy.helpers.MockDataLoader
 
 
 class RegistrationFragment : Fragment() {
@@ -23,6 +23,7 @@ class RegistrationFragment : Fragment() {
     private lateinit var korisnickoIme: EditText
     private lateinit var lozinka: EditText
     private lateinit var potvrdiLozinku: EditText
+    private lateinit var usersDao: UsersDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,9 +77,12 @@ class RegistrationFragment : Fragment() {
             {
                 if(lozinka.text.toString().length >= 8){
                     if(lozinka.text.toString() == potvrdiLozinku.text.toString()){
-                        Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
                         val novi = User(0,ime.text.toString(), prezime.text.toString(), korisnickoIme.text.toString(), lozinka.text.toString(), 0)
-                        MockDataLoader.registerUser(novi)
+
+                        usersDao = UsersDao()
+                        usersDao.addUser(novi)
+                        Toast.makeText(context, "Uspješna registracija", Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)
                     }
