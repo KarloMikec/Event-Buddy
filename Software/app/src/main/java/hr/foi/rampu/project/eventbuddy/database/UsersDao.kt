@@ -22,6 +22,26 @@ class UsersDao {
         return null
     }
 
+    fun sendOrganizerRequest(user: User, reason: String) {
+        val sql = "INSERT INTO zahtjev_organizator(ID_korisnik, opis) VALUES (${user.id}, '$reason');"
+        Database.executeUpdate(sql)
+    }
+
+    fun hasUserOrganizerRequest(user: User): Boolean {
+        val sql = """SELECT * FROM
+                        zahtjev_organizator
+                    WHERE
+                        prihvacen = 0 AND
+                        ID_korisnik = ${user.id}
+                """.trimMargin()
+        val set = Database.execute(sql)
+        var rows: Int = 0
+        while(set.next()){
+            rows++
+        }
+        return rows > 0
+    }
+
     fun getRoles(id: Int): List<Role> {
         val sql = """
             SELECT uloga.ID, uloga.Naziv
