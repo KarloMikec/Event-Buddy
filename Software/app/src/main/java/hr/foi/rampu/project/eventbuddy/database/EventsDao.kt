@@ -122,6 +122,17 @@ class EventsDao {
         Log.e("SQL",sql)
         Database.executeUpdate(sql)
     }
+    fun cancelEvent(event: Event){
+        val sql = """
+            UPDATE dogadaj SET
+                ID_status = '4'
+                WHERE
+                id = ${event.id}
+        """.trimIndent()
+        Log.e("SQL",sql)
+        Database.executeUpdate(sql)
+    }
+
 
     fun getUserEvents(user: User): List<Event> {
         val sql = "SELECT * FROM dogadaj WHERE ID_korisnik = ${user.id} ORDER BY datum DESC"

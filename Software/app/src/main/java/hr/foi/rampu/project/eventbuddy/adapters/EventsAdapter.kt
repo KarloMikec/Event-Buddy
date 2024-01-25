@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -67,17 +69,32 @@ class EventsAdapter(private val eventsList: MutableList<Event>) :
                         editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_location).text = dobivenEvent.location
                         editTaskDialogView.findViewById<TextView>(R.id.et_edit_event_dialog_overview).text = dobivenEvent.overview
 
+                        val cancelEventButton = editTaskDialogView.findViewById<Button>(R.id.btn_edit_event_dialog_cancelEvent)
+
                         AlertDialog.Builder(view.context)
                             .setView(editTaskDialogView)
                             .setTitle("Uredi događaj")
                             .setPositiveButton("Uredi") { _, _ ->
                                 val updatedEvent = dialogHelper.buildEvent(eventId)
-                                eventsDao.updateEvent(updatedEvent)
+                                if(cancelEventButton.text == "Otkaži događaj"){
+                                    eventsDao.updateEvent(updatedEvent)
+                                }else{
+                                    eventsDao.cancelEvent(updatedEvent)
+                                }
                             }
                             .setNegativeButton("Odustani"){ _, _ ->}
                             .show()
 
                         dialogHelper.activateDateTimeListeners()
+
+                        cancelEventButton.setOnClickListener{
+                            if(cancelEventButton.text != "Klikom na uredi, potvrđujete otkazivanje događaja!"){
+                                cancelEventButton.text = "Klikom na uredi, potvrđujete otkazivanje događaja!"
+                            }else{
+                                cancelEventButton.text = "Otkaži događaj"
+                            }
+                        }
+
                     }else{
                         Toast.makeText(view.context, "Vi niste organizator ovog događaja!", Toast.LENGTH_SHORT).show()
                     }
