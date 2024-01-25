@@ -124,7 +124,7 @@ class EventsDao {
     }
 
     fun getUserEvents(user: User): List<Event> {
-        val sql = "SELECT * FROM dogadaj WHERE ID_korisnik = ${user.id} ORDER BY datum DESC"
+        val sql = "SELECT * FROM dogadaj WHERE ID_korisnik = ${user.id} AND ID_status = 1  ORDER BY datum DESC"
         val set = Database.execute(sql)
         val list: MutableList<Event> = mutableListOf()
 
