@@ -1,5 +1,6 @@
 package hr.foi.rampu.project.eventbuddy.database
 
+import android.util.Log
 import hr.foi.rampu.project.eventbuddy.entities.Role
 import hr.foi.rampu.project.eventbuddy.entities.User
 
@@ -42,5 +43,19 @@ class UsersDao {
             roles += role
         }
         return roles
+    }
+
+    fun kickUser(id_korisnik: Int, id_dogadaj: Int){
+        val sql = "DELETE FROM sudionici WHERE id_korisnik = '${id_korisnik}' AND id_dogadaj = '${id_dogadaj}'"
+        Database.executeUpdate(sql)
+    }
+
+    fun banUser(id_korisnik: Int, id_dogadaj: Int){
+        val sql = "DELETE FROM sudionici WHERE id_korisnik = '${id_korisnik}' AND id_dogadaj = '${id_dogadaj}'"
+        Log.e("SQL",sql)
+        Database.executeUpdate(sql)
+        val sql2 = "INSERT INTO sudionici_zabrana (id_korisnik, id_dogadaj) VALUES ('${id_korisnik}', '${id_dogadaj}')"
+        Log.e("SQL",sql2)
+        Database.executeUpdate(sql2)
     }
 }
