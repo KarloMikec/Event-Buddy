@@ -1,7 +1,6 @@
 package hr.foi.rampu.project.eventbuddy.activities
 
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +12,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import hr.foi.rampu.project.eventbuddy.R
 import hr.foi.rampu.project.eventbuddy.database.EventsDao
-import hr.foi.rampu.project.eventbuddy.database.UsersDao
+import hr.foi.rampu.project.eventbuddy.entities.User
 import java.text.SimpleDateFormat
 import java.util.Locale
 import hr.foi.rampu.project.eventbuddy.helpers.LoggedInUser
-import java.time.LocalDate
 import java.util.Date
 
 class EventDetails : AppCompatActivity() {
@@ -56,8 +54,17 @@ class EventDetails : AppCompatActivity() {
                 val button = Button(this)
                 button.isAllCaps = false
                 button.text = k.name + " " + k.surname
-                button.setOnClickListener {
-                    Toast.makeText(this, "Odabran: ${k.name} ${k.surname} ${k.id} ", Toast.LENGTH_SHORT).show()
+
+                if(!LoggedInUser.user!!.IsOrganizer()) {
+                    Toast.makeText(this, "Vi niste organizator", Toast.LENGTH_SHORT).show()
+                }else{
+                    if(LoggedInUser.user!!.id != dobivenEvent.userId){
+                        Toast.makeText(this, "Vi niste organizator ovog događaja", Toast.LENGTH_SHORT).show()
+                    }else{
+                        button.setOnClickListener {
+                            showParticipantOptionsDialog(k)
+                        }
+                    }
                 }
                 layout.addView(button)
             }
@@ -94,5 +101,31 @@ class EventDetails : AppCompatActivity() {
     private fun isDateInPast(date: Date): Boolean {
         val currentDate = Date()
         return date.before(currentDate)
+    }
+
+    fun showParticipantOptionsDialog(sudionik: User) {
+        val options = arrayOf("Ukloni", "Zabrani")
+
+        AlertDialog.Builder(this)
+            .setTitle("${sudionik.name} ${sudionik.surname}")
+            .setItems(options) { _, opcija ->
+                if (opcija == 0) {
+                    ukloniSudionika(sudionik)
+                }else if (opcija == 1) {
+                    zabraniSudionika(sudionik)
+                }
+            }
+            .setNegativeButton("Odustani") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    fun ukloniSudionika(sudionik: User) {
+        Toast.makeText(this, "Uklonjen ${sudionik.name} ${sudionik.surname}", Toast.LENGTH_SHORT).show()
+    }
+
+    fun zabraniSudionika(sudionik: User) {
+        Toast.makeText(this, "Zabranjen ${sudionik.name} ${sudionik.surname}", Toast.LENGTH_SHORT).show()
     }
 }
