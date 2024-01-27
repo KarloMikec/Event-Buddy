@@ -288,4 +288,19 @@ class EventsDao {
         Log.e("SQL",sql)
         Database.executeUpdate(sql)
     }
+
+    fun isUserBanned(user: User, event: Event): Boolean {
+        val sql = """SELECT * FROM
+                        sudionici_zabrana
+                    WHERE
+                        ID_dogadaj = ${event.id} AND
+                        ID_korisnik = ${user.id}
+                """.trimMargin()
+        val set = Database.execute(sql)
+        var rows: Int = 0
+        while(set.next()){
+            rows++
+        }
+        return rows > 0
+    }
 }
