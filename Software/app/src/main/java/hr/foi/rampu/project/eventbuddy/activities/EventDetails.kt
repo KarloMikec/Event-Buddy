@@ -71,8 +71,10 @@ class EventDetails : AppCompatActivity() {
         val buttonParticipants = findViewById<TextView>(R.id.btn_event_details_number_of_participants)
 
         var isSubbed: Boolean = edao.isUserSubscribedOnEvent(LoggedInUser.user!!.id, dobivenEvent.id)
+        var isBanned: Boolean = edao.isUserBanned(LoggedInUser.user!!, dobivenEvent)
         if (isDateInPast(dobivenEvent.date)) buttonSubscribe.visibility = View.GONE
         buttonSubscribe.text = if (isSubbed) "Napusti događaj" else "Pretplati se"
+        if (isBanned) buttonSubscribe.isEnabled = false
         buttonSubscribe.setOnClickListener {
             if (isSubbed) {
                 edao.unsubscribeUserOnEvent(LoggedInUser.user!!, dobivenEvent)

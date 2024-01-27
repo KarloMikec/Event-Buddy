@@ -259,4 +259,19 @@ class EventsDao {
     fun unsubscribeUserOnEvent(user: User, event: Event) {
         Database.executeUpdate("DELETE FROM sudionici WHERE ID_dogadaj=${event.id} AND ID_korisnik = ${user.id}")
     }
+
+    fun isUserBanned(user: User, event: Event): Boolean {
+        val sql = """SELECT * FROM
+                        sudionici_zabrana
+                    WHERE
+                        ID_dogadaj = ${event.id} AND
+                        ID_korisnik = ${user.id}
+                """.trimMargin()
+        val set = Database.execute(sql)
+        var rows: Int = 0
+        while(set.next()){
+            rows++
+        }
+        return rows > 0
+    }
 }
