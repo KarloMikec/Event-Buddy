@@ -99,4 +99,22 @@ class UsersDao {
         """.trimIndent()
         Database.executeUpdate(sql)
     }
+
+    fun getRequest(id: Int): Boolean {
+        val sql = "SELECT * FROM zahtjev_organizator WHERE ID_korisnik = ${id}".trimIndent()
+
+        val set = Database.execute(sql)
+        Log.e("SQL", sql);
+        while(set.next()){
+            var odgovor = set.getBoolean("prihvacen")
+            Log.e("PRIHVACEN", odgovor.toString());
+            return odgovor
+        }
+        return false
+    }
+
+    fun deleteRequest(id: Int) {
+        val sql = "DELETE FROM zahtjev_organizator WHERE ID_korisnik = ${id}".trimIndent()
+        Database.executeUpdate(sql)
+    }
 }

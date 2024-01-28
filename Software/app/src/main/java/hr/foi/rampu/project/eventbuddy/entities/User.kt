@@ -1,6 +1,5 @@
 package hr.foi.rampu.project.eventbuddy.entities
 
-import hr.foi.rampu.project.eventbuddy.database.EventsDao
 import hr.foi.rampu.project.eventbuddy.database.UsersDao
 
 class User(
@@ -23,4 +22,12 @@ class User(
         }
 
     fun IsOrganizer(): Boolean = roles.find { it.id == 3 } != null
+
+    fun checkForRequest(): Boolean {
+        return usersDao.getRequest(id)
+    }
+
+    fun deleteRequest() {
+        usersDao.deleteRequest(id)
+    }
 }
