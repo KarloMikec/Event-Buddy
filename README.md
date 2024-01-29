@@ -27,7 +27,7 @@ F08 | Pretplata na događaj | Korisnik kod pregleda detalja odabranog događaja 
 F09 | Pregled svojih događaja | Korisnik može pregledavati svoje nadolazeće i prošle događaje. Organizatori će moći vidjeti vlastite kreirane događaje kao i one na koje su se pretplatili, moći će vidjeti i prošle događaje koji su završili, ali ih neće moći uređivati.| Dominik Josipović
 F10 | Pregledavanje sudionika | Korisnik će moći kod pregleda detalja odabranog događaja vidjeti broj sudionika te klikom na broj sudionika moći će vidjeti listu sudionika koji su pretplaćeni na događaj. | Karlo Mikec
 F11 | Upravljanje sudionicima | Organizator će kod prikazivanja sudionika na vlastitom događaju imati opciju uklanjanja sudionika sa događaja ili stavljanja zabrane pristupa korisniku na taj događaj | Sebastijan Vinko
-F12 | Slanje notifikacija | Aplikacija će na mobilni uređaj slati notifikacije o početku događaja. Korisnici kojima je odobren zahtjev za organizatora također će dobiti obavijest o tome. | Sebastijan Vinko
+F12 | Slanje notifikacija | Korisnici kojima je odobren zahtjev za organizatora dobivaju notifikaciju za odobrenje. Također korisnici dobivaju informacije o sakrivanju događaja i gubljenja uloge organizatora | Sebastijan Vinko
 
 ## Tehnologije i oprema
 
