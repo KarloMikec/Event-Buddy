@@ -43,11 +43,17 @@ class HomepageEventsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(view.context)
 
 
-        var odgovor = LoggedInUser.user!!.checkForRequest()
+        val odgovor = LoggedInUser.user!!.checkForRequest()
         if(odgovor){
             LoggedInUser.user!!.deleteRequest()
             val intent = Intent(view.context, NotificationService::class.java).apply {
                 putExtra("prihvacen", odgovor)
+            }
+            view.context.startForegroundService(intent)
+        }
+        if(LoggedInUser.user!!.warnings > 0){
+            val intent = Intent(view.context, NotificationService::class.java).apply {
+                putExtra("upozorenja", LoggedInUser.user!!.warnings)
             }
             view.context.startForegroundService(intent)
         }
